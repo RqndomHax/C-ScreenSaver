@@ -12,6 +12,13 @@ make
 ./screensaver
 ```
 
+> TODO
+>- add multiple algorithms support
+>- add external config file
+>- improve folder structure
+>- improve structures and functions architecture
+
 ### Have fun using my screensaver !
+
 
 ###### Made with ❤️ by RqndomHax
