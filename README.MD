@@ -1,5 +1,8 @@
 # 🐍 Screensaver
 
+### Edit the config
+>If you want to edit the config go to src/config.h
+
 ### Build
 
 ```bash
