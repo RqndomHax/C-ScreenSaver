@@ -12,6 +12,8 @@ Config *initConfig(int *errorCode) {
 
     // set config infos
     config->mode = (enum Modes) SNOW;
+    config->clearDisplay = 1;
+    config->algorithm = NULL;
     return (config);
 }
 

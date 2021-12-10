@@ -10,16 +10,7 @@
 #include <SFML/Audio.h>
 
 #include "../includes/error.h"
-
-/*
-==> DISPLAY VIDEO MODE <==
-*/
-#define WINDOW_WIDTH 1920
-#define WINDOW_HEIGHT 1080
-#define WINDOW_FULLSCREEN 1
-#define WINDOW_TITLE "Screensaver by RqndomHax"
-#define WINDOW_FONT "assets/FontAwesome.ttf"
-#define FPS_LIMIT 60
+#include "config.h"
 
 typedef struct {
     sfRenderWindow *window;
@@ -30,6 +21,6 @@ typedef struct {
 Display *initDisplay(int *errorCode);
 void destroyDisplay(Display *display);
 
-void displayHandler(Display *display);
+void displayHandler(Config *config, Display *display);
 
 #endif /* !DISPLAY_H_ */

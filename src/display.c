@@ -1,10 +1,13 @@
 #include "display.h"
+#include "algorithms/space.h"
+#include "utils/position.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 
 static void displayEvents(Display *display);
-static void displayDraw(Display *display);
+static void displayDraw(Display *display, Config *config);
+int max_value(int a, int b);
 
 Display *initDisplay(int *errorCode) {
     Display *display = malloc(sizeof(Display));
@@ -57,7 +60,7 @@ void destroyDisplay(Display *display) {
     free(display);
 }
 
-void displayHandler(Display *display) {
+void displayHandler(Config *config, Display *display) {
     while (sfRenderWindow_isOpen(display->window)) {
 
         // compute sreensaver algorithm
@@ -66,8 +69,9 @@ void displayHandler(Display *display) {
         displayEvents(display);
 
         // draw screen
-        displayDraw(display);
+        displayDraw(display, config);
     }
+    destroySpaceAlgorithm(config->algorithm);
 }
 
 static void displayEvents(Display *display) {
@@ -84,11 +88,25 @@ static void displayEvents(Display *display) {
     }
 }
 
-static void displayDraw(Display *display) {
+static void displayDraw(Display *display, Config *config) {
+
     // Reset screen
-    sfRenderWindow_clear(display->window, sfBlack);
+    if (config->clearDisplay)
+        sfRenderWindow_clear(display->window, sfBlack);
 
     // TODO draw screensaver
+    list_t *pixels = spaceAlgorithm((SpaceAlgorithm **)&config->algorithm);
+
+    while (pixels != NULL) {
+        Position *position = (Position *) pixels->data;
+        sfCircleShape *shape = sfCircleShape_create();
+        sfCircleShape_setFillColor(shape, sfYellow);
+        sfCircleShape_setPosition(shape, (sfVector2f) {position->x + WINDOW_WIDTH/2, position->y + WINDOW_HEIGHT/2});
+        sfCircleShape_setRadius(shape, (float) max_value(abs(position->x), abs(position->y)) / 100);
+        sfRenderWindow_drawCircleShape(display->window, shape, NULL);
+        sfCircleShape_destroy(shape);
+        pixels = pixels->next;
+    }
 
     // Refresh screen
     sfRenderWindow_display(display->window);

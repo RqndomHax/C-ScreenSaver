@@ -1,12 +1,13 @@
 CFLAGS 		= -W -Wall -Wextra
 
-# CFLAGS 		+= -g -g3
+CFLAGS 		+= -g -g3
 
 SFMLFLAGS 	+= -lcsfml-graphics -lcsfml-window -lcsfml-system -lcsfml-audio
 
 CC		= gcc
 
 SRC		= $(wildcard src/*.c)
+SRC		+= $(wildcard src/**/*.c)
 
 OBJ		= $(SRC:.c=.o)
 

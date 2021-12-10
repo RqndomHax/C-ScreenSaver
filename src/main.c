@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
         return (error);
     }
 
-    displayHandler(display);
+    displayHandler(config, display);
 
     // Destructor
     destroyConfig(config);
