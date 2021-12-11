@@ -1,3 +1,5 @@
 .vscode
 *.nix
 .envrc
+*.o
+screensaver
