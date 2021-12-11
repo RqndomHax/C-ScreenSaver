@@ -15,8 +15,8 @@ static SpaceAlgorithm *initSpaceAlgorithm(void)
 
 static void generateStar(SpaceAlgorithm *algorithm) {
     Position *star = malloc(sizeof(Position));
-    star->x = 100-random()%200;
-    star->y = 100-random()%200;
+    star->x = 100-(random()%200);
+    star->y = 100-(random()%200);
     list_push_back(&algorithm->stars, star);
 }
 
